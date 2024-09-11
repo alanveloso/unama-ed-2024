@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <malloc.h>
 
 typedef struct{
     int peso;   // peso em quilogramas
@@ -20,6 +21,19 @@ int main() {
     }
 
     printf("%i\n", (int) sizeof(PesoAltura));
+
+
+    PesoAltura * p;
+
+    p = (PesoAltura *) malloc(sizeof(PesoAltura));
+
+    p->altura = 180;
+    p->peso = 90;
+
+    printf("Altura: %i", p->altura);
+    printf("\n");
+    printf("Peso: %i", p->peso);
+    printf("\n");
 
     return 0;
 }
