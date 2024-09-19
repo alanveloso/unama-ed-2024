@@ -24,6 +24,25 @@ void insertAtBeginning(struct Node** head_ref, int new_data) {
     *head_ref = new_node;
 }
 
+void insertAtEnd(struct Node** head_ref, int new_data) {
+        struct Node* new_node = malloc(sizeof(struct Node));
+        struct Node* last = *head_ref; // Usado para percorrer a lista
+
+        new_node->data = new_data;
+        new_node->next = NULL;
+        // Se a lista estiver vazia, o novo nó será o primeiro nó
+        if (*head_ref = NULL) {
+            *head_ref = new_node;
+            return;
+        }
+        // Percorrer até o último nó
+        while (last->next != NULL) {
+            last = last->next;
+        }
+        // Atualizar o último nó para apontar para o novo nó
+        last->next = new_node;
+}
+
 void printList(struct Node* node) {
     while (node != NULL) {
         printf("%d -> ", node->data);
