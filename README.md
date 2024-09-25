@@ -19,3 +19,10 @@ Uma lista ligada é um **estrutura de dados lines** onde cada elemento é um nó
 ### Inserir nó no final da lista
 * Para **inserir no final**, precisamos percorrer a lista até encontrar o último nó (onde `next` é  `NULL`). O campo next desse nó será atulizado para apontar para o novo nó.
 * A inserção no final exige percorrer toda a lista, o que tem complexidade (_O(n)_), onde (n) é o número de nós.
+
+### Contar o número de elementos da lista
+
+### Buscar um elemento na lista
+* Para **buscar um elemento**, percorremos a lista e comparamos
+
+### Recializar a lista

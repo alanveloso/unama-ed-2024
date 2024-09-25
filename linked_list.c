@@ -43,6 +43,57 @@ void insertAtEnd(struct Node** head_ref, int new_data) {
         last->next = new_node;
 }
 
+int countElements(struct Node* head) {
+    int count = 0;
+    struct Node* current = head;
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+
+    return count;
+}
+
+struct Node* search(struct Node* head, int key) {
+    struct Node* current = head;
+    while (current != NULL) {
+        if (current->data == key) {
+            return current;
+        }
+        current = current->next;
+    }
+
+    return NULL;
+
+}
+
+void deleteNode(struct Node** head_ref, int key) {
+    struct Node* temp = *head_ref;
+    struct Node* prev;
+    // Caso o nó removido seja o primeiro 
+    if (temp != NULL && temp->data == key) {
+        *head_ref = temp->next; // Atualizar a cabeça da lista
+        free(temp);
+        return;
+    }
+
+    // Procurar o nó a ser removido
+    while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // Se o elemento não foi encontrado
+    if (temp == NULL) {
+        return;
+    }
+        
+
+    // Remover o nó
+    prev->next = temp->next;
+    free(temp);
+}
+
 void printList(struct Node* node) {
     while (node != NULL) {
         printf("%d -> ", node->data);
@@ -51,13 +102,44 @@ void printList(struct Node* node) {
     printf("NULL\n");
 }
 
+void reinitialize(struct Node** head_ref) {
+    struct Node* current = * head_ref;
+    struct Node* next;
+
+    // Percorrer a lista e liberar cada nó
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+
+    *head_ref = NULL;
+}
+
 int main() {
     struct Node* head = NULL;
     initialize(&head);
 
     insertAtBeginning(&head, 10); // Lista: 10 -> NULL
+
     printList(head);
-    insertAtBeginning(&head, 20); // Lista: 20 -> 10 -> NULL
+
+    insertAtBeginning(&head, 30);
+
+    printList(head);
+
+    int count = countElements(head);
+    printf("Número de elementos: %d\n", count);
+
+    struct Node* found = search(head, 5);
+
+    if (found != NULL) 
+        printf("Elemento encontrado: %d\n", found->data);
+    else
+        printf("Elemento não enontrado\n");
+
+    deleteNode(&head, 30);
+    deleteNode(&head, 10);
 
     printList(head);
 }
